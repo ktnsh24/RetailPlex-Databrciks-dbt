@@ -1,2 +1,0 @@
-{"topic": "products", "timestamp": "2024-01-15T09:50:00Z", "data": {"product_id": "PROD_036", "product_name": "Stylus Pen", "category": "Electronics", "brand": "WritePro", "price": 18.99, "stock_quantity": 220, "is_active": true}}
-{"topic": "orders", "timestamp": "2024-01-15T11:20:00Z", "data": {"order_id": "ORD_036", "customer_id": "CUST_036", "order_date": "2024-01-15", "order_status": "cancelled", "total_amount": 41.78, "quantity": 2}}

@@ -1,0 +1,5 @@
+segment_id,segment_name,segment_description,min_spend_threshold,discount_percentage,priority_support,free_shipping_threshold
+1,Standard,Basic membership with standard benefits,0,0,false,75
+2,Premium,Enhanced membership with premium benefits,500,5,true,50
+3,Gold,Gold membership with exclusive benefits,1500,10,true,25
+4,Platinum,Platinum membership with VIP benefits,5000,15,true,0
