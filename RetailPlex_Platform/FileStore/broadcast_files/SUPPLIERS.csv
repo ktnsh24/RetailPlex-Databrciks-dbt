@@ -1,0 +1,22 @@
+supplier_id,supplier_name,supplier_country,supplier_region,contact_email,payment_terms_days,quality_rating,delivery_time_days,minimum_order_value
+SUP_005,PrintMax Supplies,USA,North America,orders@printmax.com,30,4.2,5,100
+SUP_008,TechPro Electronics,China,Asia,sales@techpro.cn,45,4.5,14,200
+SUP_012,BoardMax Sports,USA,North America,info@boardmax.com,15,4.8,3,150
+SUP_015,HomeStyle Kitchen,Germany,Europe,orders@homestyle.de,30,4.3,10,75
+SUP_018,FitLife Sports,Taiwan,Asia,sales@fitlife.tw,30,4.6,12,100
+SUP_020,BrightTech Lighting,USA,North America,orders@brighttech.com,45,4.7,7,250
+SUP_022,UrbanGear Fashion,Vietnam,Asia,info@urbangear.vn,30,4.1,18,80
+SUP_025,ProtectMax Cases,South Korea,Asia,sales@protectmax.kr,30,4.4,8,50
+SUP_027,HydroMax Sports,Canada,North America,orders@hydromax.ca,15,4.9,4,75
+SUP_030,SoundWave Audio,Japan,Asia,sales@soundwave.jp,45,4.8,16,300
+SUP_032,ChefMaster Kitchen,Italy,Europe,info@chefmaster.it,30,4.5,12,120
+SUP_035,GamePro Electronics,China,Asia,orders@gamepro.cn,30,4.3,14,150
+SUP_037,TimeKeeper Home,Germany,Europe,sales@timekeeper.de,30,4.2,8,60
+SUP_040,SportAce Equipment,USA,North America,info@sportace.com,15,4.7,5,200
+SUP_042,OfficeMax Supplies,USA,North America,orders@officemax.com,30,4.4,6,100
+SUP_045,RunFast Footwear,Vietnam,Asia,sales@runfast.vn,45,4.6,20,180
+SUP_047,TabletPro Accessories,Taiwan,Asia,info@tabletpro.tw,30,4.5,10,90
+SUP_050,AudioMax Electronics,South Korea,Asia,orders@audiomax.kr,45,4.9,12,250
+SUP_052,GreenThumb Garden,Netherlands,Europe,sales@greenthumb.nl,30,4.3,8,40
+SUP_055,AutoTech Electronics,Germany,Europe,info@autotech.de,30,4.4,7,70
+SUP_057,SunStyle Fashion,Italy,Europe,orders@sunstyle.it,45,4.6,14,110
