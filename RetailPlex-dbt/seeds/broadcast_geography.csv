@@ -1,0 +1,19 @@
+state_code,state_name,region,country_code,country_name,timezone,sales_tax_rate,shipping_zone,population_millions
+NY,New York,Northeast,USA,United States,EST,0.08,1,19.8
+CA,California,West,USA,United States,PST,0.075,3,39.5
+TX,Texas,South,USA,United States,CST,0.0625,2,29.1
+FL,Florida,South,USA,United States,EST,0.06,2,21.5
+IL,Illinois,Midwest,USA,United States,CST,0.0625,1,12.7
+WA,Washington,West,USA,United States,PST,0.065,3,7.6
+CO,Colorado,West,USA,United States,MST,0.029,2,5.8
+AZ,Arizona,West,USA,United States,MST,0.056,2,7.3
+MA,Massachusetts,Northeast,USA,United States,EST,0.0625,1,7.0
+OR,Oregon,West,USA,United States,PST,0.0,3,4.2
+GA,Georgia,South,USA,United States,EST,0.04,2,10.7
+OH,Ohio,Midwest,USA,United States,EST,0.0575,1,11.8
+MO,Missouri,Midwest,USA,United States,CST,0.0423,2,6.2
+TN,Tennessee,South,USA,United States,CST,0.07,2,6.9
+NV,Nevada,West,USA,United States,PST,0.0685,3,3.1
+MN,Minnesota,Midwest,USA,United States,CST,0.0688,1,5.7
+MI,Michigan,Midwest,USA,United States,EST,0.06,1,10.0
+NC,North Carolina,South,USA,United States,EST,0.0475,2,10.5

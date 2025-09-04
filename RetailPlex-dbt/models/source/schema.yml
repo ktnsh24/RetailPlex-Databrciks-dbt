@@ -1,0 +1,26 @@
+
+version: 2
+
+sources:
+  - name: landing
+    database: retailplex_platform
+    schema: landing
+    tables:
+      - name: batch_order_items
+  - name: bronze
+    database: retailplex_platform
+    schema: bronze
+    tables:
+      - name: broadcast_geography
+  - name: silver
+    database: retailplex_platform
+    schema: silver
+    tables:
+      - name: order
+      - name: customer
+      - name: product
+      - name: event
+      - name: broadcast_customer_segments
+      - name: broadcast_product_categories
+      - name: broadcast_product_subcategories
+      - name: broadcast_suppliers
