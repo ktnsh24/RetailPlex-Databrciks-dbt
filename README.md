@@ -128,3 +128,69 @@ retailplex_platform/
 │   └── (checkpoints for streaming maintained under Volumes/checkpoints/retailplex_stream)
 ⚡ = Indicates dbt involvement
 ```
+🎯 Purpose of Bronze Layer
+
+- Bronze Layer: Store structured raw data with ingestion metadata, while preserving fidelity for downstream transformation.
+- Prepares a solid foundation for the Silver layer, where cleaning, deduplication, and standardization will take place.
+
+## 🥈 Silver Layer
+
+The **Silver schema** is the **refined layer** in the Medallion Architecture.  
+Here, data from Bronze is **cleaned, structured, and modeled** for business use cases.  
+Different strategies are applied depending on the type of data (SCD1, SCD2, CDC, or dbt transformations).
+
+---
+
+### 🔹 Transformation Strategy
+
+- **Multiplex Stream Data**  
+  Split into dedicated domain tables:
+  - **Customers (SCD1)**  
+    - Uses Slowly Changing Dimension Type 1.  
+    - Updates overwrite existing records (no history tracked).  
+  - **Orders (SCD2, PySpark)**  
+    - Maintains full history of changes.  
+    - Implemented in **PySpark** for flexibility.  
+  - **Products (SCD2, SQL)**  
+    - Tracks product history over time.  
+    - Implemented in **SQL** for simplicity.  
+  - **Events (CDC Strategy)**  
+    - A `event_cdc` table stores all insert/update/delete changes (full history).  
+    - A `event` table stores only the latest snapshot of events.
+
+- **Broadcast Reference Tables**  
+  - Views are created in Silver schema from Bronze tables (`customer_segments`, `product_categories`, `product_subcategories`, `suppliers`, `geography`).  
+  - Explicit schemas are defined for consistency.
+
+- **Batch & Seed Data (via dbt ⚡)**  
+  - **Batch Table (`batch_order_items`)**:  
+    - Re-materialized via **dbt** in Silver schema with proper schema definitions.  
+  - **Geography Seed Table**:  
+    - Materialized as a **view** in Silver schema via **dbt**.
+
+---
+
+### 📂 Silver Layer Flow
+
+```plaintext
+retailplex_platform/
+├── silver/
+│   ├── customer (SCD1, from multiplex_stream)
+│   ├── order (SCD2, PySpark, from multiplex_stream)
+│   ├── product (SCD2, SQL, from multiplex_stream)
+│   ├── event_cdc (full CDC history from multiplex_stream)
+│   ├── event (latest snapshot view from event_cdc)
+│   ├── broadcast_customer_segments (view from bronze)
+│   ├── broadcast_product_categories (view from bronze)
+│   ├── broadcast_product_subcategories (view from bronze)
+│   ├── broadcast_suppliers (view from bronze)
+│   ├── silver_batch_order_items ⚡ (dbt model)
+│   └── silver_broadcast_geography ⚡ (dbt seed view)
+⚡ = Indicates dbt involvement
+```
+🎯 Purpose of Silver Layer
+
+- Normalize and split multiplex data into domain tables.
+- Apply SCD1, SCD2, and CDC strategies to preserve meaning and maintain history where necessary.
+- Use dbt for batch and seed transformations, ensuring CI/CD integration.
+- Expose clean, consistent, and business-ready datasets for downstream analytics and the Gold layer.
