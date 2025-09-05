@@ -46,19 +46,8 @@ This project simulates a **retail analytics platform** where data is ingested fr
 
 ## 📂 Data Flow till Landing Schema
 
-retailplex_platform
-└── landing
-└── raw_files
-├── incoming_multiplex_data
-│ └── retailplex_multiplex_stream_<timestamp>.jsonl
-├── refdata
-│ ├── Customer_segments.csv
-│ ├── Geography.csv
-│ ├── Product_categories.csv
-│ ├── Product_subcategories.csv
-│ └── Suppliers.csv
-└── batch_data
-└── batch_order_items.csv
+<img width="571" height="331" alt="image" src="https://github.com/user-attachments/assets/a2898144-ae67-4454-9a21-cae8c21c5183" />
+
 
 
 
