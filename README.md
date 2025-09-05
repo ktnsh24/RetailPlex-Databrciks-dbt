@@ -40,16 +40,21 @@ This project simulates a **retail analytics platform** where data is ingested fr
 
 /Volumes/retailplex_platform/landing/raw_files/batch_data/batch_order_items.csv
 
+- Loaded as managed table: landing.batch_order_items.
 - Provides **order line–level transactions** linking customers, orders, products, and events.  
 
 ---
+So far, the landing schema acts as the raw ingestion zone:
+
+- Streaming JSON lines (multiplex)
+- Referential CSVs (refdata)
+- Bulk batch CSV (batch_order_items)
+
+These datasets are the foundation for downstream bronze → silver → gold processing in the medallion architecture.
 
 ## 📂 Data Flow till Landing Schema
 
-<img width="571" height="331" alt="image" src="https://github.com/user-attachments/assets/a2898144-ae67-4454-9a21-cae8c21c5183" />
-
-
-
+<img width="737" height="391" alt="image" src="https://github.com/user-attachments/assets/33afc876-bbea-4761-9f71-7080374f4be2" />
 
 
 ---
