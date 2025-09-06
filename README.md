@@ -194,3 +194,119 @@ retailplex_platform/
 - Apply SCD1, SCD2, and CDC strategies to preserve meaning and maintain history where necessary.
 - Use dbt for batch and seed transformations, ensuring CI/CD integration.
 - Expose clean, consistent, and business-ready datasets for downstream analytics and the Gold layer.
+
+## 🥇 Gold Layer – Data Modelling
+
+In the **Gold layer**, we apply **data modelling** to transform refined Silver data into **dimensions** and **fact tables**.  
+These serve as the foundation for KPIs, analytics, and future data marts (FLT).  
+
+Currently, the following **dimension (`dim_`)** and **fact (`fct_`)** tables have been materialized in **dbt ⚡**.  
+FLT (data marts) will be introduced later.
+
+---
+
+### 📊 Dimensions (DIM)
+
+#### 1. `gold_dim_customer`
+**Purpose:** Enrich the `customer` table with attributes for segmentation and geography.
+
+**Key Features:**
+- Adds customer **segment metadata** (discount %, support level, free shipping threshold).  
+- Links customers to **region & country** via geography lookup.  
+- Computes **customer tenure days** from registration date.  
+- Only active customers (`active_ind = 1`) are included.  
+
+**Business Question Answered:**  
+➡️ *“Who are our customers, what segments do they belong to, where are they located, and how long have they been with us?”*
+
+---
+
+#### 2. `gold_dim_product`
+**Purpose:** Create a fully enriched **product dimension**.
+
+**Key Features:**
+- Joins product with **category, subcategory, and supplier metadata**.  
+- Computes **margin per unit** (`price – cost`).  
+- Adds supplier quality rating and region.  
+
+**Business Question Answered:**  
+➡️ *“What products do we sell, how are they categorized, who supplies them, and what’s their profit margin?”*
+
+---
+
+### 📈 Facts (FCT)
+
+#### 1. `gold_fct_order_items`
+**Purpose:** Provide a **granular sales fact table** at the order item level.
+
+**Key Features:**
+- Includes revenue breakdowns:  
+  - **Gross revenue** = qty × price  
+  - **Gross profit** = qty × (price – cost)  
+  - **Net revenue** = gross – discount + tax + shipping  
+- Joins with product to fetch cost for margin calculations.  
+
+**Business Question Answered:**  
+➡️ *“How much revenue and profit are we making at the item level?”*
+
+---
+
+#### 2. `gold_fct_customer_lifetime`
+**Purpose:** Aggregate a customer’s **lifetime value metrics**.
+
+**Key Features:**
+- Total orders placed.  
+- Lifetime revenue (gross, net) and profit.  
+- **Last order date** for recency tracking.  
+- **Active days span** (time between first and last order).  
+
+**Business Question Answered:**  
+➡️ *“What is each customer’s lifetime value and engagement span?”*
+
+---
+
+#### 3. `gold_fct_event_funnel`
+**Purpose:** Track customer activity across the **conversion funnel**.
+
+**Key Features:**
+- Aggregates event data per customer/session.  
+- Counts: `views`, `add_to_cart`, `checkout_started`, `purchases`.  
+
+**Business Question Answered:**  
+➡️ *“How do customers progress through the funnel, and where do they drop off?”*
+
+### 📂 Gold Layer Flow
+
+```plaintext
+retailplex_platform/
+├── gold/
+│   ├── gold_dim_customer ⚡ (dbt model)
+│   │     - Enriched customer profile
+│   │     - Joined with customer segments + geography
+│   │     - Includes demographics, tenure, active filter
+│   │
+│   ├── gold_dim_product ⚡ (dbt model)
+│   │     - Enriched product attributes
+│   │     - Categories, subcategories, suppliers
+│   │     - Includes margin per unit (price - cost)
+│   │
+│   ├── gold_fct_order_items ⚡ (dbt model)
+│   │     - Transaction-level fact table
+│   │     - Gross revenue, net revenue, gross profit
+│   │
+│   ├── gold_fct_customer_lifetime ⚡ (dbt model)
+│   │     - Customer-level aggregated metrics
+│   │     - Orders, revenue, profit, last activity
+│   │
+│   └── gold_fct_event_funnel ⚡ (dbt model)
+│         - Session-level funnel
+│         - Views → Cart Adds → Checkout → Purchases
+⚡ = Indicates dbt involvement
+```
+🎯 Purpose of the Gold Layer
+
+- Business-friendly data → Abstracts away raw/operational complexity and delivers curated, business-ready entities.
+- Dimensional modeling → Organizes data into Dimensions (who/what/where) and Facts (transactions/metrics) following star schema principles.
+- Single source of truth → Ensures consistent KPIs and metrics across reporting tools.
+- Optimized for BI/Analytics → Tables are pre-aggregated, joined with reference data, and designed for fast query performance.
+- Governed by dbt ⚡ → All models in this layer are built, materialized, and documented using dbt for transparency, lineage, and testing.
